@@ -52,3 +52,8 @@ end
 # Punctuation Suffixes and Prefixes
 # Regexp and Range
 
+bar = {
+    s: 2,
+    v: 4
+}
+puts bar

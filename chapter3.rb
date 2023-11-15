@@ -96,4 +96,7 @@ puts a===b
 # Implicit conversions:
 
 e = Exception.new("not really an exception")
-msg = "Error: " + e 
+msg = "Error: " + e.to_s 
+
+puts "pi is about %.4f" % Math::PI 
+puts "%s: %f" % ["pi", Math::PI]
