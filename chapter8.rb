@@ -131,3 +131,121 @@ puts h.one
 
 String.class_eval { private :reverse }
 "hello".reverse # NoMethodError: private method 'reverse'
+
+# ---Hooks----------------------------------------------------------------
+
+def Object.inherited(c)
+    puts "class #{c} < #{self}"
+end
+
+# Included
+
+# Declaring a module to greet a person
+module Greetings
+
+    def self.included(person_to_be_greeted) 
+        
+        puts "The #{person_to_be_greeted} is welcomed with an open heart !"
+    end
+end
+    
+    
+    # Class where the module is included
+class Person
+    include Greetings # implementation of the include statement
+end
+    
+
+# Prepended
+
+# Code as an example for prepend method
+module Ruby
+
+    def self.prepended(target)# Implementation of prepend method
+        puts "#{self} has been prepended to #{target}"
+    end
+    
+    def Type
+        "The Type belongs to Ruby"
+    end
+end
+    
+class Coding
+    
+    prepend Ruby # the module Ruby is prepended
+end
+    
+    # Method call
+puts Coding.new.Type 
+    
+# Extended
+
+# Code as an example for extend method
+module Ruby
+
+    def self.extended(target)
+        puts "#{self} was extended by #{target}"
+    end
+    
+    def Type
+        "The Type is Ruby"
+    end
+end
+    
+class Coding
+    
+    extend Ruby # Extending the module Ruby
+end
+    
+    # Method calling
+puts Coding.Type
+    
+# Inherited
+# Making the parent Vehicle class
+class Vehicle
+
+    def self.inherited(car_type)
+        puts "#{car_type} is a kind of Vehicle"
+    end
+    
+end
+    
+    # Target class
+class Hyundai < Vehicle #Inhereting the Vehicle class
+end
+    
+# method_missing
+
+# The main class
+class Ruby
+
+    def method_missing(input, *args) # method_missing function in action
+        "#{input} not defined on #{self}"
+    end
+    
+    def Type
+        "The Type is Ruby"
+    end
+end
+    
+var = Ruby.new
+    
+    # Calling a method that exists
+puts var.Type 
+    
+    # Calling a method that does not exist
+puts var.Name 
+    
+#--- Custom Control Structures----------------------------------------------------------------
+
+# Delaying and Repeating Execution: after and every
+
+require 'afterevery'
+1.upto(5) {|i| after i { puts i} } 
+sleep(5)
+every 1, 6 do |count|
+    puts count
+    break if count == 10 
+    count + 1
+end 
+sleep(6)
