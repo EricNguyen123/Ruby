@@ -224,3 +224,71 @@ a.transpose
 empty = Hash.new(-1) 
 puts empty["two"]
 puts empty.default
+
+
+require 'set'
+
+puts (1..5).to_set 
+[1,2,3].to_set
+
+Set.new(1..5) # => #<Set: {5, 1, 2, 3, 4}> 
+Set.new([1,2,3]) # => #<Set: {1, 2, 3}> 
+Set.new([1,2,3]) {|x| x+1} # => #<Set: {2, 3, 4}>
+
+Set["cow", "pig", "hen"] # => #<Set: {"cow", "pig", "hen"}>
+
+
+s = Set.new(1..3) 
+s.include? 1 
+s.member? 0
+# => #<Set: {1, 2, 3}>
+# => true
+# => false: member? is a synonym
+
+s = Set[2, 3, 5]
+t = Set[2, 3, 5, 7] 
+s.subset? t 
+t.subset? s 
+s.proper_subset? t 
+t.superset? s 
+t.proper_superset? s 
+s.subset? s 
+s.proper_subset? s
+# => true # => false # => true # => true # => true # => true # => false
+
+s = Set[2, 3, 5]
+s.length # => 3
+s.size
+
+primes = Set[2, 3, 5, 7] 
+odds = Set[1, 3, 5, 7, 9]
+# The intersection is the 
+primes & odds 
+primes.intersection(odds)
+# The union is the set of 
+primes | odds 
+primes.union(odds)
+# a-b: is the elements of 
+primes-odds
+odds-primes 
+primes.difference(odds)
+
+s = Set[]
+s << 1
+s.add 2
+s << 3 << 4 << 5 
+s.add 3
+s.add? 6 
+s.add? 3
+
+s = (1..3).to_set # => #<Set: {1, 2, 3}> 
+s.merge(2..5)
+
+s = (1..3).to_set 
+s.delete 1 
+s.delete 1 
+s.delete? 1 
+s.delete? 2
+
+s = (1..3).to_set # => #<Set: {1, 2, 3}> 
+s.subtract(2..10) # => #<Set: {1}>
